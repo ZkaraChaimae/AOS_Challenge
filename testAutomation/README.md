@@ -11,6 +11,7 @@
 
 ### Lancer les scripts de tests :
 La description des différents scénarios du test de login se trouve dans le fichier Excel *specifications_tests.xlsx*.
+
 Il y a deux fichier, le premier est *loginIsSuccessful*, qui est le script d'automatisation du scénario de test : *Login avec succès*.
 Le deuxième est pour l'automatisation du scénario de test : *Login échoué*.
 
