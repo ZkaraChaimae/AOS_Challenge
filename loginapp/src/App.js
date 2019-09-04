@@ -1,15 +1,39 @@
 import React from 'react';
 //import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
 
 class App extends React.Component {
-  
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      login: '',
+      password: '',
+      errorMessage: ''
+    }
+  }
+
+  navigate() {
+    this.context.router.push('/');
+  }
+
   mySubmitHandler = (event) => {
     event.preventDefault();
-    const data = new FormData(event.target);
-    let email = data.get("login");
-    let psd = data.get("password");
-    alert(email + " " + psd);
+    axios.post("http://localhost:3001/verify", this.state)
+      .then(Response => {
+        console.log(Response.data.loginResult);
+        if (!Response.data.loginResult)
+          this.setState({ errorMessage: 'Login or password not valid, please try again!' })
+        else {
+          window.location = 'http://localhost:3001/';
+        }
+
+      });
+  }
+
+  changeHandler = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   render() {
@@ -17,19 +41,24 @@ class App extends React.Component {
       <div className="App">
         <header className="App-header">
           <h1>Hello AOS</h1>
-
           <form onSubmit={this.mySubmitHandler}>
-            <input type="text" name="login" placeholder="Email"></input>
+            <p>{this.state.errorMessage}</p>
+            <input type="text" name="login" placeholder="Email" onChange={this.changeHandler}></input>
             <br></br>
-            <input type="password" name="password" placeholder="Password"></input>
+            <input type="password" name="password" placeholder="Password" onChange={this.changeHandler}></input>
             <br></br>
-            {/* <button onClick={this.formSubmitHandler.bind(this)}>Submit</button> */}
             <input type='submit' />
           </form>
         </header>
       </div>
     );
   }
+
+  welcomePage = () => {
+    return (
+      <h3>Welcome {this.state.login}</h3>
+    );
+  };
 }
 
 export default App;
