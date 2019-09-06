@@ -42,12 +42,12 @@ class App extends React.Component {
         <header className="App-header">
           <h1>Hello AOS</h1>
           <form onSubmit={this.mySubmitHandler}>
-            <p>{this.state.errorMessage}</p>
-            <input type="text" name="login" placeholder="Email" onChange={this.changeHandler}></input>
+            <p id="errorMsg">{this.state.errorMessage}</p>
+            <input type="text" id="login" name="login" placeholder="Email" onChange={this.changeHandler}></input>
             <br></br>
-            <input type="password" name="password" placeholder="Password" onChange={this.changeHandler}></input>
+            <input type="password" id="password" name="password" placeholder="Password" onChange={this.changeHandler}></input>
             <br></br>
-            <input type='submit' />
+            <input id="btnSubmit" type='submit' />
           </form>
         </header>
       </div>
